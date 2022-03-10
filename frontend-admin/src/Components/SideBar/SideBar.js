@@ -1,8 +1,6 @@
 import React from 'react';
-import { SideBarData } from './SideBarData';
-import './SideBar.css';
-
-
+import '../SideBar/sidebar.css'
+import { SideBarData } from '../SideBar/SideBarData';
 
 function SideBar() {
 
@@ -14,7 +12,7 @@ function SideBar() {
   return (
     <div className="sidebar">
       
-      <img id='logo' src={require('../images/logo.png')} alt='img'/>
+      
 
       <ul className="sidebarlist">
         {SideBarData.map((val, key) => {
@@ -28,7 +26,7 @@ function SideBar() {
               }}
             >
               
-              <div id="icon">{val.icon}</div>   <div id="title">{val.title}</div>
+              <div id="icon">{val.icon}</div> 
               
             </li>
             
