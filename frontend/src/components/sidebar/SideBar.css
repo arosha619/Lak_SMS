@@ -21,15 +21,15 @@
     width: 300px;
    background-color: rgba(0, 0, 0, 0.075);
 }
-#sidebarlogo{
-    padding-top: 80px;
-    padding-left: 100px;
-    margin-left: auto;
-    margin-right: auto;
+#logo{
+    max-width:180px ;
+    max-height: 190px;
+    margin-left: 80px;
+    
 }
 .sidebarlist{
   
-  padding-top: 80px;
+  padding-top: 10px;
   padding-left: 0;
   width: 100%;
 
@@ -53,7 +53,7 @@
     background-image: linear-gradient(to right,rgba(255, 180, 0, 1), rgba(254, 222, 122, 1));
 }
 .sidebarlist   #active{
-  background-image: linear-gradient(to right,hsl(42, 100%, 50%), rgba(254, 222, 122, 1));
+  background-image: linear-gradient(to right,rgb(255, 179, 0), rgba(254, 222, 122, 1));
 }
 
 #icon{
