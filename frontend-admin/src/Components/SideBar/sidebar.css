@@ -50,3 +50,6 @@
     place-items: center;
    
 }
+.sidebarlist   #active{
+  background-color:  rgba(254, 222, 122, 1);
+}
