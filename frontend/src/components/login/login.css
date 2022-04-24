@@ -1,0 +1,41 @@
+.eclips1 {
+  position: absolute;
+  width: 500px;
+  height: 100%;
+  left: 1039px;
+  /* top: -32px; */
+
+  background: linear-gradient(
+    180deg,
+    #ffb400 0%,
+    rgba(255, 214, 0, 0.72) 0.01%,
+    #fede7a 100%
+  );
+}
+
+.eclips2 {
+  position: absolute;
+  width: 500px;
+  height: 100%;
+  left: 935px;
+  /* top: -32px; */
+background: linear-gradient(184.24deg, #dfba04 6.57%, #eac303 92.42%);
+}
+
+.eclips3{
+    position: absolute;
+width: 500px;
+height: 100%;
+left: 871px;
+/* top: -32px; */
+
+background: linear-gradient(181.29deg, #CF9405 8.73%, #5C4202 92.51%);
+}
+
+ #logo{
+    position: absolute;
+width: 500px;
+height: 430px;
+left: 1020px;
+top: 150px;
+} 
