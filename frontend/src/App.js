@@ -13,31 +13,25 @@ import SideBar from "./components/sidebar/SideBar";
 function App() {
   return (
     <div className="App">
-
-      
-      <div className="column left" >
-      <SideBar />
+      <div className="column left">
+        <SideBar />
       </div>
-    
-    
+
       <div className="column right">
-      <Router>
+        <Router>
           <Routes>
-            <Route  path="/home"  element={<Home/>} />
-            <Route path="/create-message"  element={<CreateMessage/>} />
-            <Route path="/profile"  element={<Profile/>} />
-            <Route path="/contacts"  element={<Contacts/>} />
-            <Route path="/settings"  element={<Settings/>} />
-            <Route path="/SMS-Bundles"  element={<SmsBundles/>} />
-            <Route path="/contact-us"  element={<ContactUs/>} />
-            
+          
+            <Route path="/home" element={<Home />} />
+            <Route path="/create-message" element={<CreateMessage />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contacts" element={<Contacts />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/SMS-Bundles" element={<SmsBundles />} />
+            <Route path="/contact-us" element={<ContactUs />} />
           </Routes>
         </Router>
       </div>
-      
-  
     </div>
-    
   );
 }
 
