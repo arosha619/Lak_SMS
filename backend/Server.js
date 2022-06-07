@@ -26,6 +26,10 @@ app.get("/", (req, res) => {
   res.send("Hello wolrd");
 });
 
+//bundles route
+const bundlerouter= require("./route/bundle");
+app.use("/bundle",bundlerouter);
+
 //PORT
 
 app.listen(PORT, () => {
