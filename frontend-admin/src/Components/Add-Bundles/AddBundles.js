@@ -1,12 +1,12 @@
 import "../Add-Bundles/AddBundle.css";
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import axios from "axios";
 import { Button } from 'react-bootstrap';
 
 
 
 function AddBundles() {
-  
+  //add bundle data
 const [Bundle_name,setName]=useState("");
 const [Price,setPrice]=useState("");
 const [No_OF_SMS,setSMS]=useState("");
@@ -26,15 +26,42 @@ function sendData(e){
 
   else{
   axios.post("http://localhost:5000/bundle/add",newBundle).then(()=>{
+    loadData();
+    setName(" ");
+    setPrice(" ");
+    setSMS(" ");
+
     alert("bundle added!")
+    
   }).catch((err)=>{
    alert(err)
-  })}
-  
-
+  })} 
 }
-  
+//fetch bundle data
+   const [data, setData] = useState([]);
+   
+   const loadData=()=>{
+    axios.get("http://localhost:5000/bundle/").then((res)=>{
+      setData(res.data);
+    }).catch((err)=>{
+      alert(err.message)
+    })}
 
+  useEffect(() => { 
+     loadData();
+  }, []);
+  
+//delete
+const onRemove = (id) => {
+  axios.delete("http://localhost:5000/bundle/delete/" + id)
+    .then(() => {
+      loadData();
+      alert("Successfully deleted");
+    })
+    .catch((err) => {
+      alert(err.res.data);
+    })
+}
   return (
     <div>
       
@@ -85,9 +112,43 @@ function sendData(e){
       </div>
       </div>
 
-      <div>
-        
+      {/* display data*/}
+
+
+      <div style={{ marginTop: "100px" }}>
+        <table className="styled-table">
+          <thead>
+            <tr>
+              <th style={{ textAligan: "center" }}>No.</th>
+              <th style={{ textAligan: "center" }}>Bundle Name</th>
+              <th style={{ textAligan: "center" }}>Price</th>
+              <th style={{ textAligan: "center" }}>No of SMS</th>
+              <th style={{ textAligan: "center" }}>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => {
+              return (
+                  <tr key={item.id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{item.Bundle_name}</td>
+                  <td>{item.Price}</td>
+                  <td>{item.No_OF_SMS}</td>
+                  <td>
+                   
+                    <button
+                      className="btn btn-Delete"
+                      onClick={() => onRemove(item._id)}>
+                        <img id="delete" src={require("../images/delete.png")} alt="delete"/>
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
+
     </div>
   );
 }
