@@ -1,55 +1,93 @@
-import React from "react";
-import { Button } from "react-bootstrap";
 import "../Add-Bundles/AddBundle.css";
+import React, { useState } from "react";
+import axios from "axios";
+import { Button } from 'react-bootstrap';
+
+
 
 function AddBundles() {
+  
+const [Bundle_name,setName]=useState("");
+const [Price,setPrice]=useState("");
+const [No_OF_SMS,setSMS]=useState("");
+
+function sendData(e){
+  e.preventDefault();
+
+  const newBundle={
+    Bundle_name,
+    Price,
+    No_OF_SMS
+  }
+  if (!Bundle_name || !Price || !No_OF_SMS) 
+  {
+    alert("Please Provide values into each input field");
+  }
+
+  else{
+  axios.post("http://localhost:5000/bundle/add",newBundle).then(()=>{
+    alert("bundle added!")
+  }).catch((err)=>{
+   alert(err)
+  })}
+  
+
+}
+  
+
   return (
     <div>
+      
       <div className="title">
         <h5>Bundle Management</h5>
       </div>
-     
-
-      <div >
-      <table>
-  <tr>
-    <th></th>
-    <th>Bundle Name</th>
-    <th>Price</th>
-    <th>No of SMS</th>
-    <th>Delete</th>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Free</td>
-    <td>Rs.500</td>
-    <td>100</td>
-    <td><img id="delete" src={require('../images/delete.png')} alt="delete"/></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Super</td>
-    <td>RS.1000</td>
-    <td>500</td>
-    <td><img id="delete" src={require('../images/delete.png')} alt="delete"/></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Blaster</td>
-    <td>Rs.1500</td>
-    <td>750</td>
-    <td><img id="delete" src={require('../images/delete.png')} alt="delete"/></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Buddy</td>
-    <td>Rs.750</td>
-    <td>250</td>
-    <td><img id="delete" src={require('../images/delete.png')} alt="delete"/></td>
-</tr>
-</table>
+      <div className="container" >
+      {/* form for add bundle */}
+      <div style={{ marginTop: "70px" }}>
+        <div
+          style={{
+            margin: "auto",
+            padding: "10px",
+            textAlign: "center",
+          }}
+        >
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Bundle Name"
+            onChange={(e)=>{setName(e.target.value);}}
+            
+            
+          />
+          <label htmlFor="price">Price</label>
+          <input
+            type="text"
+            id="price"
+            name="price"
+            placeholder="Bundle price"
+            onChange={(e)=>{setPrice(e.target.value);}}
+            
+          />
+          <label htmlFor="no_of_sms">no_of_sms</label>
+          <input
+            type="text"
+            id="no_of_sms"
+            name="no_of_sms"
+            placeholder="no_of_sms"
+            onChange={(e)=>{setSMS(e.target.value);}}
+            
+           
+          /><br/>
+           <Button id="savebutton" variant="warning" onClick={sendData} >Save</Button>
+        </div>
       </div>
-      <Button id="Addrow" variant="secondary">+Add row</Button>
+      </div>
+
+      <div>
+        
+      </div>
     </div>
   );
 }
