@@ -1,37 +1,46 @@
 #delete{
-    width: 25px;
-    height: 25px;
-    align-items: center;
-    cursor: pointer;
-    
+  width: 25px;
+  height: 25px;
+  align-items: center;
+  cursor: pointer;
+  
 }
 table {
-    border-collapse: collapse;
-    width: 850px;
-    margin-top: 50px;
-    height: 40%;
-    
-  }
+  border-collapse: collapse;
+  width: 850px;
+  margin-top: 50px;
+  height: 40%;
   
+}
+
 th, td {
-    text-align: left;
-    padding: 8px;
-  }
-  
+  text-align: left;
+  padding: 8px;
+}
+
 tr:nth-child(even){background-color: #f2f2f2}
-  
+
 th {
-    background-color: #555c59;
-    color: white;
-  }
+  background-color: #555c59;
+  color: white;
+}
 
 .title h5{
-    margin-top: 60px;
-    font-size: x-large;
-    
+  margin-top: 60px;
+  font-size: x-large;
+  
 }  
 
 #Addrow{
-  margin-top: 50px;
-  float: right;
+margin-top: 50px;
+float: right;
+}
+.container{
+background-color: rgba(79, 82, 82, 0.463);
+}
+#savebutton{
+margin-top: 20px;
+}
+#delete{
+size: 20%;
 }
