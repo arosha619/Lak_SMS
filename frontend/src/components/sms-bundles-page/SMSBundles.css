@@ -94,4 +94,23 @@
 
 }
 
+.container h6{
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   text-decoration: none;
+   border: 2px solid rgb(44, 134, 134);
+   border-radius: 12px;
+   padding: 2px;
+   margin-left: 35px;
+   margin-right: 35px;
+ 
+   
+}
+.container h5{
+ font-size:x-large ;
+ font-weight: 600;
+ text-shadow: 0 0 3px #dfdf13, 0 0 5px #6ee6de;
+ color: #48a7b6;
+
+}
+
 
