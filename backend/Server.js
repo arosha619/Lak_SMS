@@ -1,37 +1,38 @@
 const express = require("express");
-const app = express();
-const cors = require("cors");
 const mongoose = require("mongoose");
-const ConnetDB = require("./db");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const app = express();
+require("dotenv").config();
 
-const PORT = 5000;
 
-require("./models/user");
+const PORT = process.env.PORT || 5000;
 
-//DB connection
-ConnetDB();
-
-//
 app.use(cors());
-app.use(express.json());
-const auth = require("./route/auth");
+app.use(bodyParser.json());
+
+const URL = process.env.MONGODB_URL;
 
 
-//Route
-app.use("/", auth);
+mongoose.connect(URL, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+})
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log("Mongodb connection success!");
+})
+
+const contactrouter = require("./routes/contactroute");
 
 
-app.get("/", (req, res) => {
-  console.log("This is server ");
-  res.send("Hello wolrd");
-});
+app.use("/contact",contactrouter);
 
-//bundles route
-const bundlerouter= require("./route/bundle");
-app.use("/bundle",bundlerouter);
-
-//PORT
 
 app.listen(PORT, () => {
-  console.log("server has been stared", PORT);
+console.log(`Server is up and running on port number: ${PORT}`);
 });
