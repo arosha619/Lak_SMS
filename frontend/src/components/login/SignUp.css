@@ -1,0 +1,31 @@
+form  input[type="text"]:focus {
+    border-bottom: 1px solid #ffb400  !important;
+    box-shadow: 0 1px 0 0 #ffb400  !important;
+  }
+  
+  form input[type="password"]:focus {
+    border-bottom: 1px solid #ffb400  !important;
+    box-shadow: 0 1px 0 0 #ffb400  !important;
+  }
+  
+  form input[type="date"]:focus {
+    border-bottom: 1px solid #ffb400  !important;
+    box-shadow: 0 1px 0 0 #ffb400  !important;
+  }
+  #reg {
+    color:rgba(252, 198, 52, 0.904);
+    text-align: center;
+  
+  }
+  mycard{
+     background-color: aliceblue;
+      background-size: cover;
+      padding: 40px;
+     
+  }
+  /* span{
+    color: red;
+    font-size: 12px;
+    padding: 3px;
+    display: none;
+  } */

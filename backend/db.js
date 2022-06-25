@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const url =
-"mongodb+srv://Student:shukry1998@cluster1.uth5l.mongodb.net/Student?retryWrites=true&w=majority";
+"mongodb+srv://user1:LakSMS@cluster0.nigz2.mongodb.net/?retryWrites=true&w=majority";
 
 const ConnetDB = async () => {
   try {

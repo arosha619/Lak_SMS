@@ -1,14 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+
+import App from "./App";
+import { AuthContext } from "./context/Authcontext/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <AuthContext>
+      <App />
+    </AuthContext>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

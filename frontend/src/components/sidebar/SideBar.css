@@ -53,7 +53,7 @@
     background-image: linear-gradient(to right,rgba(255, 180, 0, 1), rgba(254, 222, 122, 1));
 }
 .sidebarlist   #active{
-  background-image: linear-gradient(to right,rgb(255, 179, 0), rgba(254, 222, 122, 1));
+  background-image: linear-gradient(to right,#ffb300, rgba(254, 222, 122, 1));
 }
 
 #icon{
@@ -64,4 +64,9 @@
 
 #title{
     flex: 70%;
+}
+
+#logout{
+  margin-left: 90px;
+  margin-top:100px ;
 }

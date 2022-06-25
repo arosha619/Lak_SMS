@@ -1,96 +1,105 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const router = require("express").Router();
 const User = require("../models/user");
-
+const bcrypt = require("bcryptjs");
+const user = require("../models/user");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRECT } = require("../key");
-const loginAuth = require("../middleware/loginAuth");
+const {
+  JWT_SECRECT,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+} = require("../key");
+//const { OAuth2Client } = require('google-auth-library');
+//const client =new OAuth2Client(GOOGLE_CLIENT_ID);
 
-router.get("/protected", loginAuth, (req, res) => {
-  res.send("this is work");
-});
-
-router.post("/signup", (req, res) => {
-  const { firstname, lastname,email, password } = req.body;
-
-  if (!firstname ||!lastname || !email || !password) {
-    return res.status(400).json({ err: "**please fil this form**" });
-  }
-
-  User.findOne({ email: email }).then((savedUser) => {
-    if (savedUser) {
-      return res.status(400).json({ err: "**user already exits**" });
-    }
-    bcrypt
-      .hash(password, 15)
-      .then((hashedPassword) => {
-        const user = new User({
-          firstname,
-          lastname,
-          email,
-          password: hashedPassword,
-        })
-          .save()
-          .then((user) => {
-            return res.json({ msg: "**Signup successfully**" });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+//signUp
+router.post("/signup", async (req, res) => {
+  const user = new User({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    dob: req.body.dob,
+    email: req.body.email,
+    password: req.body.password,
+    companyname: req.body.companyname,
+    address: req.body.address,
+    designation: req.body.designation,
+    contactno: req.body.contactno,
   });
+  try {
+    var emailexist = await User.findOne({ email: req.body.email });
+    if (emailexist) {
+      return res.status(400).json("Email already Exist");
+    }
+    var hashpsw = await bcrypt.hash(req.body.password, 10);
 
-  if (!validateEmail(email)) {
-    return res.status(400).json({ err: "**invalid email check again**" });
+    const user = await new User({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      dob: req.body.dob,
+      email: req.body.email,
+      password: hashpsw,
+      companyname: req.body.companyname,
+      address: req.body.address,
+      designation: req.body.designation,
+      contactno: req.body.contactno,
+    });
+    var data = await user.save();
+    return res.json(data);
+  } catch (err) {
+    return res.status(400).json(err);
   }
-
-  if (password.length < 6) {
-    return res
-      .status(400)
-      .json({ err: "**password should be morethan 06 char**" });
-  }
+  return res.json(user);
 });
 
-router.post("/signin", (req, res) => {
-  const { email, password } = req.body;
+// login
 
-  if (!email || !password) {
-    return res.status(404).json({ err: "please enter email and password" });
-  }
-
-  User.findOne({ email }).then((saveUser) => {
-    if (!saveUser) {
-      return res.status(422).json({ err: "Invalid email and passsword" });
+router.post("/login", async (req, res) => {
+  try {
+    var validemail = await User.findOne({ email: req.body.email });
+    if (!validemail) {
+      return res.status(400).json("Email not valid ");
     }
 
-    bcrypt
-      .compare(password, saveUser.password)
-      .then((doMatch) => {
-        if (doMatch) {
-          const { _id, name, email } = saveUser;
-          const token = jwt.sign({ _id: saveUser._id }, JWT_SECRECT);
-          res.json({ token, user: { _id, name, email } });
-        } else {
-          res.status(422).json({ err: "Invalid email and passsword" });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
-});
+    var validpsw = await bcrypt.compare(req.body.password, validemail.password);
+    if (!validpsw) {
+      return res.status(400).json("Pasword not valid ");
+    }
 
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //give token
+    var usertoken = jwt.sign(
+      { email: validemail.email, id: validemail._id },
+      JWT_SECRECT
     );
+
+    res.header("auth", usertoken).json({
+      user_id: validemail._id,
+      token: usertoken,
+    });
+  } catch (error) {
+    return res.status(400).json(err);
+  }
+});
+//valid user
+const Validuser = (req, res, next) => {
+  var token = req.header("auth");
+  req.token = token;
+  next();
 };
+
+//google login
+// router.post("/google",async(req,res)=>{
+// const googleAuth =(token)=>{
+//   const ticket = client.verifyIdToken({
+// idToken:token,
+// audiance :GOOGLE_CLIENT_ID,
+
+//   });
+//   const payload = ticket.getPayload();
+//   console.log("User ${payload.name} verified");
+//   const{sub,email,name,picture}=payload;
+//   const userId=sub;
+//   return {userId,email,fullName:name,photoUrl:picture}
+// };
+
+// });
 
 module.exports = router;

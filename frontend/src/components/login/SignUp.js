@@ -1,116 +1,173 @@
-import {React, useState } from "react";
-import M from "materialize-css";
-import  {Link,useNavigate}  from "react-router-dom";
-const SignUp = () => {
-  const history = useNavigate();
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./SignUp.css";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-  const [firstname, setfirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [dob, setDob] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [companyname, setCompanyname] = useState("");
-  const [address, setAddress] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [contactno, setContactno] = useState("");
+const SignUp = (props) => {
+  let navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      firstname: "",
+      lastname: "",
+      dob: "",
+      email: "",
+      password: "",
+      companyname: "",
+      address: "",
+      designation: "",
+      contactno: "",
+    },
+    validationSchema: yup.object({
+      firstname: yup.string().strict().trim().required("this field required"),
 
-  const postData = () => {
-    fetch("http://localhost:6000/signup", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstname: firstname,
-        lasttname: lastname,
-        dob: dob,
-        password: password,
-        email: email,
-        companyname: companyname,
-        address: address,
-        designation: designation,
-        contactno: contactno,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.err) {
-          M.toast({ html: data.err, classes: "#f44336 red" });
-        } else {
-          M.toast({ html: data.msg, classes: "#00c853 green accent-4" });
-          history.push("/signin");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+      lastname: yup.string().strict().trim().required("this field required"),
+
+      dob: yup.string().strict().trim().required("this field required"),
+
+      email: yup.string().strict().trim().required("this field required"),
+      password: yup.string().strict().trim().required("this field required"),
+      companyname: yup.string().strict().trim().required("this field required"),
+
+      address: yup.string().strict().trim().required("this field required"),
+
+      designation: yup.string().strict().trim().required("this field required"),
+
+      contactno: yup.string().strict().trim().required("this field required"),
+    }),
+    onSubmit: (data) => {
+      console.log(data);
+      axios
+        .post("http://localhost:5000/signup", data)
+        .then((res) => {
+          toast.success("Successfully Register");
+          navigate("/");
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+    },
+  });
+  
+
   return (
-    <div className="reg">
-      <div className="reg-detail">
-        <h2>Register</h2>
-        <input
-          type="text"
-          placeholder="Enter name"
-          value={firstname}
-          onChange={(e) => setfirstname(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter lastname"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-        /> 
-        <input
-          type="text"
-          placeholder="Enter date of birth"
-          value={dob}
-          onChange={(e) => setDob(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    
 
-        <input
-          type="text"
-          placeholder="Enter Company name"
-          value={companyname}
-          onChange={(e) => setCompanyname(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter designation"
-          value={designation}
-          onChange={(e) => setDesignation(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Enter Contact No"
-          value={contactno}
-          onChange={(e) => setContactno(e.target.value)}
-        />
-        <button
-          className="btn "
-          onClick={() => postData()}
-        >
-          SignUp
-        </button>
+    <div className="mycard">
+      <div className="card auth-card input-field">
+        <h3 id="reg">Register</h3>
+
+        <form autoComplete="off" onSubmit={formik.handleSubmit}>
+          <input
+            placeholder="Enter firstname"
+            name="firstname"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.firstname}
+          />
+          {formik.errors.firstname ? (
+            <div className="text-danger">{formik.errors.firstname}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter lastname"
+            name="lastname"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.lastname}
+          />
+          {formik.errors.lastname ? (
+            <div className="text-danger">{formik.errors.lastname}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter date of birth"
+            type="text"
+            onfocus="(this.type='date')"
+            name="dob"
+            onChange={formik.handleChange}
+            value={formik.values.dob}
+          />
+          {formik.errors.dob ? (
+            <div className="text-danger">{formik.errors.dob}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          {formik.errors.email ? (
+            <div className="text-danger">{formik.errors.email}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter password"
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.errors.password ? (
+            <div className="text-danger">{formik.errors.password}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter Company name"
+            name="companyname"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.companyname}
+          />
+          {formik.errors.companyname ? (
+            <div className="text-danger">{formik.errors.companyname}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter Address"
+            name="address"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.address}
+          />
+          {formik.errors.address ? (
+            <div className="text-danger">{formik.errors.address}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter designation"
+            name="designation"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.designation}
+          />
+          {formik.errors.designation ? (
+            <div className="text-danger">{formik.errors.designation}</div>
+          ) : null}
+
+          <input
+            placeholder="Enter Contact No"
+            name="contactno"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.contactno}
+          />
+          {formik.errors.contactno ? (
+            <div className="text-danger">{formik.errors.contactno}</div>
+          ) : null}
+
+          <button
+            type="submit"
+            className="btn waves-effect waves-light #ff3d00 dark blue accent-3"
+          >
+            SignUP
+          </button>
+        </form>
         <h6>
           <Link to="/">Already have an account ?</Link>
         </h6>
