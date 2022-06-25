@@ -11,13 +11,13 @@
   
   
 }
-.shapes{
+/* .shapes{
       width: 0;
       height: 0;
       border-top: 50px solid transparent;
       border-left: 100px solid red;
       border-bottom: 50px solid transparent;
-}
+} */
 
 .container{
   display: flex;
@@ -112,5 +112,7 @@
  color: #48a7b6;
 
 }
-
-
+#BundleName{
+  font-size:30px;
+  font-weight: 500;
+}

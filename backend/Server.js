@@ -47,7 +47,9 @@ app.get("/", (req, res) => {
 const bundlerouter= require("./route/bundle");
 app.use("/bundle",bundlerouter);
 
-
+//payments route
+const paymentrouter= require("./route/payment");
+app.use("/payment",paymentrouter);
 
 
 //PORT
