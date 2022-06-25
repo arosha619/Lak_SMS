@@ -4,8 +4,12 @@ import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
+import Header from "../header/Header";
+=======
 import { PayPalButton } from "react-paypal-button-v2";
 import Modal from 'react-bootstrap/Modal';
+>>>>>>> b18c23f6b8dea75e6782cf9f5fc8b5cbd67cbfac
 
 
 function SmsBundles() {
@@ -64,9 +68,15 @@ axios.post("http://localhost:5000/payment/add",newpayment).then(()=>{
 
 }
   return (
+<<<<<<< HEAD
+    <div><Header title="SMS Bundles" />
+    
+      
+=======
     
     <div>
       <h3 id="pagetitle">SMS Bundles</h3>
+>>>>>>> b18c23f6b8dea75e6782cf9f5fc8b5cbd67cbfac
       
       
       

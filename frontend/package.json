@@ -5,21 +5,32 @@
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@syncfusion/ej2-react-calendars": "^19.4.56",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "@vonage/server-sdk": "^2.11.1",
+    "antd": "^4.21.3",
     "axios": "^0.26.1",
     "bootstrap": "^5.1.3",
+    "draft-js": "^0.11.7",
+    "draft-js-export-html": "^1.4.1",
     "facebook-login": "^1.4.1",
     "formik": "^2.2.9",
+    "js-autosave": "^1.0.0",
     "jwt-decode": "^3.1.2",
     "materialize-css": "^1.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
+<<<<<<< HEAD
+    "react-icons": "^4.3.1",
+=======
     "react-paypal-button-v2": "^2.6.3",
+>>>>>>> b18c23f6b8dea75e6782cf9f5fc8b5cbd67cbfac
     "react-scripts": "5.0.0",
+    "react-simple-typewriter": "^3.0.1",
     "react-toastify": "^9.0.5",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

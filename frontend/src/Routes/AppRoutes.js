@@ -8,6 +8,9 @@ import Settings from "../components/settings-page/Settings";
 import SmsBundles from "../components/sms-bundles-page/SmsBundles";
 import ContactUs from "../components/contact-us-page/ContactUs";
 import SideBar from "../components/sidebar/SideBar";
+import CatogarizeMsg from "../components/Create-msg-page/CatogarizeMsg";
+import ScheduleMessage from "../components/Create-msg-page/ScheduleMessage";
+
 import Notfound from "../notfound";
 import { ToastContainer } from "react-toastify";
 
@@ -27,6 +30,8 @@ const AppRoutes = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/SMS-Bundles" element={<SmsBundles />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/CatogarizeMessage" element={<CatogarizeMsg />} />
+          <Route path="/ScheduleMessage" element={<ScheduleMessage />} />
           <Route path="*" element={<Notfound />} />
         </Routes>
         <ToastContainer />

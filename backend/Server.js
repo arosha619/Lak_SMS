@@ -47,9 +47,16 @@ app.get("/", (req, res) => {
 const bundlerouter= require("./route/bundle");
 app.use("/bundle",bundlerouter);
 
+<<<<<<< HEAD
+//message route
+
+const messagerouter= require("./route/message.js");
+app.use("/message", messagerouter);
+=======
 //payments route
 const paymentrouter= require("./route/payment");
 app.use("/payment",paymentrouter);
+>>>>>>> b18c23f6b8dea75e6782cf9f5fc8b5cbd67cbfac
 
 
 //PORT
