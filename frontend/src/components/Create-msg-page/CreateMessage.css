@@ -1,0 +1,77 @@
+ 
+
+*{
+
+    box-sizing: border-box;
+  }
+  .Box
+{
+    
+   
+    background-color:whitesmoke; 
+    box-shadow:rgb(172, 172, 172);
+    box-shadow: -3px -3px   3px 8px ; 
+    padding :100px;
+    height :55vh;
+    width :800px;
+    margin:150px;
+    border:10px solid gray;;
+    border-radius: 70px;
+    
+  
+    
+} 
+.editor
+{
+  padding-top: 1px;
+  padding-bottom: 50px;
+
+}.btnOne
+{
+    border: none;
+    background: transparent;
+    padding: 6px 16px;
+    font-size: 1.1rem;
+    color: white;
+    background: orange;
+    border-radius: 5px;
+    transition: 0.3s all ease-out;
+    cursor: pointer;
+    position: fixed;
+    right: 27%;
+    top:79%;
+    
+}
+.btnOne:hover
+{
+color: orange;
+background: white;
+}
+.btnTwo
+{
+    border: none;
+    background: transparent;
+    padding: 6px 16px;
+    font-size: 1.1rem;
+    color: white;
+    background: orange;
+    border-radius: 5px;
+    transition: 0.3s all ease-out;
+    cursor: pointer;
+    position: fixed;
+   
+    top:79%;
+    
+   
+}
+.btnTwo:hover
+
+{
+color: orange;
+background: white;
+
+}
+.form-control {
+  height: 200px;;
+  width: 600px;
+}

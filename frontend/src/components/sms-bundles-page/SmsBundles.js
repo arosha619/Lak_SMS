@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+import Header from "../header/Header";
 
 
 function SmsBundles() {
@@ -23,8 +24,9 @@ useEffect(() => {
 }, []);
 
   return (
-    <div>
-      <h3 id="pagetitle">SMS Bundles</h3>
+    <div><Header title="SMS Bundles" />
+    
+      
       
       
       <div className="container">

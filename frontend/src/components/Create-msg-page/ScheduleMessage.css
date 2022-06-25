@@ -1,0 +1,43 @@
+/* .main{
+
+    text-align: center;
+    position: fixed;
+    right: 35%;
+    bottom: 39%;
+    font-size: x-large;
+    color:#b2beb5; 
+    font-style: italic;
+    
+
+} */
+ .app{
+
+    text-align: center;
+    position: fixed; 
+    right:35%;
+    bottom: 65%;
+    font-size: x-large;
+    color: orange;
+
+}  
+.btnFour
+{
+    border: none;
+    background: transparent;
+    padding: 6px 16px;
+    font-size: 1.1rem;
+    color: white;
+    background: orange;
+    border-radius: 5px;
+    transition: 0.3s all ease-out;
+    cursor: pointer;
+    position: fixed;
+    right: 30%;
+    top:79%;
+    
+}
+.btnFour:hover
+{
+color: orange;
+background: white;
+}

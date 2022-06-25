@@ -1,0 +1,22 @@
+.btnThree{
+    border: none;
+    background: transparent;
+    padding: 6px 16px;
+    font-size: 1.1rem;
+    color: white;
+    background: orange;
+    border-radius: 5px;
+    transition: 0.3s all ease-out;
+    position: fixed;
+    right: 50%;
+    top: 50%;
+}
+.btnThree:hover
+{
+color: orange;
+background: white;
+}.EnterAge{
+    height: 22px;;
+    width: 90px;
+    border-width: 0.01ch;
+}
