@@ -1,37 +1,60 @@
+
+
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const ConnetDB = require("./db");
+const auth = require("./route/auth");
+const userview = require("./route/userview");
+const morgan = require("morgan");
+
+app.use(express.json());
+app.use(morgan('dev'));
+
+
+
 
 const PORT = 5000;
+require("dotenv").config();
 
-require("./models/user");
+
+
+
 
 //DB connection
 ConnetDB();
 
-//
+
 app.use(cors());
-app.use(express.json());
-const auth = require("./route/auth");
+
 
 
 //Route
+
 app.use("/", auth);
+//userview Route
+
+app.use("/userview",userview);
 
 
 app.get("/", (req, res) => {
   console.log("This is server ");
-  res.send("Hello wolrd");
+ return res.send("Hello wolrd");
 });
-
 //bundles route
 const bundlerouter= require("./route/bundle");
 app.use("/bundle",bundlerouter);
+
+
+
 
 //PORT
 
 app.listen(PORT, () => {
   console.log("server has been stared", PORT);
 });
+
+
+

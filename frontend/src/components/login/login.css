@@ -1,41 +1,83 @@
-.eclips1 {
-  position: absolute;
-  width: 500px;
+.login-container {
+
   height: 100%;
-  left: 1039px;
-  /* top: -32px; */
+  background-size: cover;
+  }
 
-  background: linear-gradient(
-    180deg,
-    #ffb400 0%,
-    rgba(255, 214, 0, 0.72) 0.01%,
-    #fede7a 100%
-  );
-}
 
-.eclips2 {
-  position: absolute;
-  width: 500px;
-  height: 100%;
-  left: 935px;
-  /* top: -32px; */
-background: linear-gradient(184.24deg, #dfba04 6.57%, #eac303 92.42%);
-}
-
-.eclips3{
+  .loginhead {
+    color:rgb(10, 121, 121) ;
+  
+  
+  }
+  
+  .log-detail {
+    margin-top: 0px;
+    margin-left: 100px;
+    padding: 80px;
+  }
+  
+  .eclips1 {
     position: absolute;
-width: 500px;
-height: 100%;
-left: 871px;
-/* top: -32px; */
-
-background: linear-gradient(181.29deg, #CF9405 8.73%, #5C4202 92.51%);
-}
-
- #logo{
+    width: 500px;
+    height: 100%;
+    left: 1029px;
+    top: -7px;
+  float: right;
+    border-radius: 500px 0px 0 500px;
+    background: linear-gradient(
+      180deg,
+      #ffb400 0%,
+      rgba(255, 214, 0, 0.72) 0.01%,
+      #fede7a 100%
+    );
+  }
+  
+  .eclips2 {
     position: absolute;
-width: 500px;
-height: 430px;
-left: 1020px;
-top: 150px;
-} 
+    width: 500px;
+    height: 100%;
+    left: 950px;
+     top: -7px; 
+     border-radius: 500px 0px 0 500px;
+    background: linear-gradient(184.24deg, #dfba04 6.57%, #eac303 92.42%);
+  }
+  
+  .eclips3 {
+    position: absolute;
+    width: 500px;
+    height: 100%;
+    left: 871px;
+    top: -7px;
+    border-radius: 500px 0px 0px 500px;
+    background: linear-gradient(181.29deg, #cf9405 8.73%, #5c4202 92.51%);
+  }
+  
+  .logo {
+    position: absolute;
+    width: 350px;
+    height: 400px;
+    left: 530px;
+    top: 70px;
+  }
+  
+  .input-field input[type="text"]:focus {
+    border-bottom: 1px solid #ffb400  !important;
+    box-shadow: 0 1px 0 0 #ffb400  !important;
+    
+  }
+  
+  .input-field input[type="password"]:focus {
+    border-bottom: 1px solid #ffb400  !important;
+    box-shadow: 0 1px 0 0 #ffb400  !important;
+   
+  }
+  
+  .input-field input[type="date"]:focus {
+    border-bottom: 1px solid #ffb400  !important;
+    box-shadow: 0 1px 0 0 #ffb400  !important;
+  }
+  
+  
+  
+  

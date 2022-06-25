@@ -1,126 +1,121 @@
 import React from "react";
-import  {useState}  from "react";
-import { Link, useNavigate } from "react-router-dom";
-import M from "materialize-css";
+import { Link } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 import "./login.css";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useAuthContext } from "../../context/Authcontext/AuthContext";
 
-// import { GoogleLogin } from 'react-google-login';
+//import facebookLogin from 'facebook-login';
+//import { message } from 'antd';
+//import { toast } from 'react-toastify';
+//import  {useState}  from "react";
 
+const clientId =
+  "146026151331-clc6akmqeo9i9ldbbhrkvboice7269no.apps.googleusercontent.com";
 
-const Login = () => {
-  const history = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = (props) => {
+  const { setUser } = useAuthContext();
 
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  // }
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: yup.object({
+      email: yup.string().strict().trim().required("this field required"),
+      password: yup.string().strict().trim().required("this field required"),
+    }),
+    onSubmit: (data) => {
+      console.log(data);
+      axios
+        .post("http://localhost:5000/login", data)
+        .then((res) => {
+          localStorage.setItem("auth", JSON.stringify(res.data));
 
-  const postData = () => {
-    fetch("/signin", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password: password,
-        email: email,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.err) {
-          M.toast({ html: data.err, classes: "#f44336 red" });
-        } else {
-          localStorage.setItem("jwt", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
+          toast.success("Successfully Login 😍 ");
 
-          M.toast({
-            html: "login successfully",
-            classes: "#00c853 green accent-4",
-          });
-          history.push("/home");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+          console.log("login data", res.data);
+
+          // navigate("/side");
+          setUser(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.response.data);
+        });
+    },
+  });
+
   return (
     <div className="login-container">
-      
-        <div className="eclips3"></div>
-        <div className="eclips2"></div>
-        <div className="eclips1"></div>
-        <div className="login-right">
+      <div className="eclips3"></div>
+      <div className="eclips2"></div>
+      <div className="eclips1"></div>
+      <div className="login-right">
         <div className="logo">
-        <img id='logo' src={require('../images/logo.png')} alt='img'/>
+          <img className="logo" src={require("../images/logo.png")} alt="img" />
         </div>
-        
       </div>
 
       <div className="log-detail">
-        <h2>LAK SMS</h2>
-        
-        <input
-          type="text"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        
-        <h6>
-        Already do not have an account ?<Link to="/signup" > SignUp</Link>
-        </h6>
-        <button
-          className="btn"
-          onClick={() => {
-            postData();
-          }}
-        >
-          Login
-        </button>
+        <h2 className="loginhead">Login</h2>
+        <div className="card auth-log input-field">
+          <form autoComplete="off" onSubmit={formik.handleSubmit}>
+            <input
+              placeholder="Enter email"
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
 
-         {/* <div className="google_login">
-        <GoogleLogin
-    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
-    cookiePolicy={'single_host_origin'}
-  />
+            {formik.errors.email ? (
+              <div className="text-danger">{formik.errors.email}</div>
+            ) : null}
 
-        </div>  */}
+            <input
+              placeholder="Enter password"
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            {formik.errors.password ? (
+              <div className="text-danger">{formik.errors.password}</div>
+            ) : null}
 
-       </div>
-     
-      </div>  
-    
+            <h6>
+              <Link to="/forgotpassword"> ForgotPassword</Link>
+            </h6>
+
+            <h6>
+              Already do not have an account ?<Link to="/signup"> SignUp</Link>
+            </h6>
+            <button
+              type="submit"
+              className="btn waves-effect waves-light #ff3d00 yellow accent-3"
+            >
+              login
+            </button>
+          </form>
+
+          <div>
+            <GoogleLogin
+              clientId={clientId}
+              buttonText="Login with Google"
+              // onSuccess={onSuccess}
+              // onFailure={onFailure}
+              cookiePolicy={"single_host_origin"}
+              style={{ marginTop: "100px" }}
+              isSignedIn={true}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
-  
 };
 
 export default Login;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
